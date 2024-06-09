@@ -53,7 +53,8 @@ def sum_list(list_):
         print(f'\033[31mОбидно, произошла ошибка, обработаю ее там, откуда меня вызвали.\033[0m')
         raise
     else:
-        print(f'\033[93mУРА! Наконец-то мы смогли посчитать без ошибок!!!\033[0m f1{tuple(list_)} = {res}')
+        print(f'\033[93mУРА! Наконец-то мы смогли посчитать без ошибок!!!\033[0m f1{tuple(list_)} = {res}\n')
+        return res
     finally:
         print('='*60)
 
@@ -64,6 +65,8 @@ for l in list_:
         sum_list(l)
     except InvalidDataException as exp_:
         print('Возникла ошибка введенных данных. Ниже будет описание ошибки:\n' + str(exp_), end='\n\n')
+        print('Но мы разобьем ваш список на 2 списка, Если и это не поможет, то, извините, но вы все сломали:')
+        sum_list([sum_list(l[0:3]), sum_list(l[3:])])
     except InvalidTypeData as exp_:
         print('Неправильный тип данных:\n' + str(exp_), end='\n\n')
     except Exception as exp_:
